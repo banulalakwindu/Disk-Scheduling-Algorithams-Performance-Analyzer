@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr class="table-primary">
+            <th scope="col">Algorithm</th>
+            <th scope="col">Avg. Seek Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">FCFS</th>
+            <td>{{outputFCFS}}</td>
+        </tr>
+        <tr>
+            <th scope="row">SSTF</th>
+            <td>{{outputSSTF}}</td>
+        </tr>
+        <tr>
+            <th scope="row">SCAN</th>
+            <td>{{outputSCAN}}</td>
+        </tr>
+        <tr>
+            <th scope="row">C-SCAN</th>
+            <td>{{outputCSCAN}}</td>
+        </tr>
+        <tr>
+            <th scope="row">C-LOOK</th>
+            <td>{{outputCLOOK}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5 class="mt-5">The Best Disk Scheduling Algoritham for Given Request Queue is <span
+        class="text-danger">{{best}}</span>
+</h5>
+
+<div>{{output}}</div>
+
+{% endblock contents %}

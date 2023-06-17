@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+<form class="d-flex flex-column m-auto text-start" action="processing/" method="post" style="max-width: 300px;">
+    {% csrf_token %}
+    {{form}}
+    <input class="mt-4 btn btn-primary" type="submit" value="Check the Best Algorithm">
+</form>
+{% endblock contents %}
