@@ -12,8 +12,7 @@ def fcfs(dataObject, hPos):
     for i in range(len(dataObject)):
         sum += abs(hPos - dataObject[i])
         hPos = dataObject[i]
-    average = sum / len(dataObject)
-    return average
+    return sum
 
 def sstf(dataObject, hPos):
     length = len(dataObject)
@@ -27,10 +26,9 @@ def sstf(dataObject, hPos):
         sum += min
         hPos = dataObject[index]
         dataObject.pop(index)
-        average = sum / length
-    return average
+    return sum
 
-def scan(dataObject, hPos):
+def scan(dataObject, hPos, sPos, ePos):
     sum = 0
     dataObject.append(hPos)
     dataObject.sort()
@@ -43,7 +41,7 @@ def scan(dataObject, hPos):
             sum += abs(dataObject[i] - dataObject[i+1])
     return sum
 
-def cscan(dataObject, hPos):
+def cscan(dataObject, hPos, sPos, ePos):
     sum = 0
     dataObject.append(hPos)
     dataObject.sort()
@@ -55,7 +53,7 @@ def cscan(dataObject, hPos):
         sum += abs(dataObject[i] - dataObject[i+1])
     return sum
 
-def clook(dataObject, hPos):
+def clook(dataObject, hPos, sPos, ePos):
     sum = 0
     dataObject.append(hPos)
     dataObject.sort()
@@ -78,6 +76,8 @@ def processing(request):
             outArr = []
             data = request.POST['data']
             hPos = request.POST['hPos']
+            sPos = request.POST['sPos']
+            ePos = request.POST['ePos']
             dataArr = data.split(' ')
             dataobject = map(int, dataArr)
             datalist = list(dataobject)
@@ -85,11 +85,11 @@ def processing(request):
             outArr.append(outputFCFS)
             outputSSTF = sstf(datalist, int(hPos))
             outArr.append(outputSSTF)
-            outputSCAN = scan(datalist, int(hPos))
+            outputSCAN = scan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputSCAN)
-            outputCSCAN = cscan(datalist, int(hPos))
+            outputCSCAN = cscan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCSCAN)
-            outputCLOOK = clook(datalist, int(hPos))
+            outputCLOOK = clook(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCLOOK)
             best = algoArr[outArr.index(min(outputFCFS, outputSSTF, outputSCAN, outputCSCAN, outputCLOOK))]
     return render(request, 'processing.html', {'outputFCFS': outputFCFS, 'outputSSTF': outputSSTF, 'outputSCAN': outputSCAN, 'outputCSCAN': outputCSCAN, 'outputCLOOK': outputCLOOK, 'best': best})
