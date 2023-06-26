@@ -6,16 +6,19 @@
     <thead>
         <tr class="table-primary">
             <th scope="col">Algorithm</th>
+            <th scope="col">Cylinder Moves</th>
             <th scope="col">Number of Cylinders Head Moved</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <th scope="row">FCFS</th>
+            <td>{{fcfsarr}}</td>
             <td>{{outputFCFS}}</td>
         </tr>
         <tr>
             <th scope="row">SSTF</th>
+            <td>{{sstfarr}}</td>
             <td>{{outputSSTF}}</td>
         </tr>
         <tr>
@@ -36,7 +39,5 @@
 <h5 class="mt-5">The Best Disk Scheduling Algoritham for Given Request Queue is <span
         class="text-danger">{{best}}</span>
 </h5>
-
-<div>{{output}}</div>
 
 {% endblock contents %}
