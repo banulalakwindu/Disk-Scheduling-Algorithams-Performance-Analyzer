@@ -9,6 +9,7 @@ def fcfs(dataObject, hPos):
         sum += abs(hPos - dataObjectforFCFS[i])
         fcfsarr.append(hPos)
         hPos = dataObjectforFCFS[i]
+    fcfsarr.append(hPos)
     return (sum, fcfsarr)
 
 def sstf(dataObject, hPos):
@@ -25,6 +26,7 @@ def sstf(dataObject, hPos):
         sstfarr.append(hPos)
         hPos = dataObjectforSSTF[index]
         dataObjectforSSTF.pop(index)
+    sstfarr.append(hPos)
     return (sum, sstfarr)
 
 def scan(dataObject, hPos, sPos, ePos):
