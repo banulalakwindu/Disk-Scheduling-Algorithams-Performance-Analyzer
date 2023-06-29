@@ -29,7 +29,7 @@ def sstf(dataObject, hPos):
     sstfarr.append(hPos)
     return (sum, sstfarr)
 
-def scan(dataObject, hPos, sPos, ePos):
+def scan(dataObject, hPos, sPos):
     dataObjectforSCAN = dataObject.copy()
     sum = 0
     scanarr = []
@@ -64,7 +64,7 @@ def cscan(dataObject, hPos, sPos, ePos):
         sum += abs(cscanarr[i] - cscanarr[i+1])
     return (sum, cscanarr)
 
-def clook(dataObject, hPos, sPos, ePos):
+def clook(dataObject, hPos):
     dataObjectforCLOOK = dataObject.copy()
     clookarr = []
     sum = 0
@@ -101,11 +101,11 @@ def processing(request):
             outArr.append(outputFCFS)
             (outputSSTF, sstfarr) = sstf(datalist, int(hPos))
             outArr.append(outputSSTF)
-            (outputSCAN, scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
+            (outputSCAN, scanarr) = scan(datalist, int(hPos), int(sPos))
             outArr.append(outputSCAN)
             (outputCSCAN,cscanarr) = cscan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCSCAN)
-            (outputCLOOK,clookarr) = clook(datalist, int(hPos), int(sPos), int(ePos))
+            (outputCLOOK,clookarr) = clook(datalist, int(hPos))
             outArr.append(outputCLOOK)
             best = algoArr[outArr.index(min(outputFCFS, outputSSTF, outputSCAN, outputCSCAN, outputCLOOK))]
     return render(request, 'processing.html', {'outputFCFS': outputFCFS, 'outputSSTF': outputSSTF, 'outputSCAN': outputSCAN, 'outputCSCAN': outputCSCAN, 'outputCLOOK': outputCLOOK, 'best': best, 'fcfsarr': fcfsarr, 'sstfarr': sstfarr, 'scanarr': scanarr,'cscanarr': cscanarr, 'clookarr': clookarr })
