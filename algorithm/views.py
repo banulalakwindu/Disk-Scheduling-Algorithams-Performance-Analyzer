@@ -32,40 +32,51 @@ def scan(dataObject, hPos, sPos, ePos):
     sum = 0
     scanarr = []
     dataObjectforSCAN.append(hPos)
+    dataObjectforSCAN.append(sPos)
     dataObjectforSCAN.sort()
     index = dataObjectforSCAN.index(hPos)
-    if index < len(dataObjectforSCAN)/2:
-        for i in range(index, -1, -1):
-            sum += abs(dataObjectforSCAN[i] - dataObjectforSCAN[i-1])
-    else:
-        for i in range(index, len(dataObjectforSCAN)-1):
-            sum += abs(dataObjectforSCAN[i] - dataObjectforSCAN[i+1])
+    for i in range(index,-1,-1):
+        scanarr.append(dataObjectforSCAN[i])
+    for i in range(index+1,len(dataObjectforSCAN)):
+        scanarr.append(dataObjectforSCAN[i])
+    #total head movement
+    for i in range(len(scanarr)-1):
+        sum += abs(scanarr[i] - scanarr[i+1])
     return (sum, scanarr)
 
 def cscan(dataObject, hPos, sPos, ePos):
     dataObjectforCSCAN = dataObject.copy()
     sum = 0
+    cscanarr = []
     dataObjectforCSCAN.append(hPos)
+    dataObjectforCSCAN.append(sPos)
+    dataObjectforCSCAN.append(ePos)
     dataObjectforCSCAN.sort()
     index = dataObjectforCSCAN.index(hPos)
-    for i in range(index, len(dataObjectforCSCAN)-1):
-        sum += abs(dataObjectforCSCAN[i] - dataObjectforCSCAN[i+1])
-    sum += abs(dataObjectforCSCAN[len(dataObjectforCSCAN)-1] - dataObjectforCSCAN[0])
-    for i in range(0, index):
-        sum += abs(dataObjectforCSCAN[i] - dataObjectforCSCAN[i+1])
-    return sum
+    for i in range(index,len(dataObjectforCSCAN)):
+        cscanarr.append(dataObjectforCSCAN[i])
+    for i in range(0,index):
+        cscanarr.append(dataObjectforCSCAN[i])
+    #total head movement
+    for i in range(len(cscanarr)-1):
+        sum += abs(cscanarr[i] - cscanarr[i+1])
+    return (sum, cscanarr)
 
 def clook(dataObject, hPos, sPos, ePos):
     dataObjectforCLOOK = dataObject.copy()
+    clookarr = []
     sum = 0
     dataObjectforCLOOK.append(hPos)
     dataObjectforCLOOK.sort()
     index = dataObjectforCLOOK.index(hPos)
-    for i in range(index, len(dataObjectforCLOOK)-1):
-        sum += abs(dataObjectforCLOOK[i] - dataObjectforCLOOK[i+1])
-    for i in range(0, index):
-        sum += abs(dataObjectforCLOOK[i] - dataObjectforCLOOK[i+1])
-    return sum
+    for i in range(index,len(dataObjectforCLOOK)):
+        clookarr.append(dataObjectforCLOOK[i])
+    for i in range(0,index):
+        clookarr.append(dataObjectforCLOOK[i])
+    #total head movement
+    for i in range(len(clookarr)-1):
+        sum += abs(clookarr[i] - clookarr[i+1])
+    return (sum, clookarr)
 
 def home(request):
     form = InputForm()
@@ -90,9 +101,9 @@ def processing(request):
             outArr.append(outputSSTF)
             (outputSCAN, scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputSCAN)
-            outputCSCAN = cscan(datalist, int(hPos), int(sPos), int(ePos))
+            (outputCSCAN,cscanarr) = cscan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCSCAN)
-            outputCLOOK = clook(datalist, int(hPos), int(sPos), int(ePos))
+            (outputCLOOK,clookarr) = clook(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCLOOK)
             best = algoArr[outArr.index(min(outputFCFS, outputSSTF, outputSCAN, outputCSCAN, outputCLOOK))]
-    return render(request, 'processing.html', {'outputFCFS': outputFCFS, 'outputSSTF': outputSSTF, 'outputSCAN': outputSCAN, 'outputCSCAN': outputCSCAN, 'outputCLOOK': outputCLOOK, 'best': best, 'fcfsarr': fcfsarr, 'sstfarr': sstfarr})
+    return render(request, 'processing.html', {'outputFCFS': outputFCFS, 'outputSSTF': outputSSTF, 'outputSCAN': outputSCAN, 'outputCSCAN': outputCSCAN, 'outputCLOOK': outputCLOOK, 'best': best, 'fcfsarr': fcfsarr, 'sstfarr': sstfarr, 'scanarr': scanarr,'cscanarr': cscanarr, 'clookarr': clookarr })
