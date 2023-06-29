@@ -8,15 +8,7 @@ def fcfs(dataObject, hPos):
     for i in range(len(dataObjectforFCFS)):
         sum += abs(hPos - dataObjectforFCFS[i])
         fcfsarr.append(hPos)
-<<<<<<< HEAD
         hPos = dataObjectforFCFS[i]
-=======
-        hPos = dataObject[i]
-    print(dataObject)
-<<<<<<< HEAD
->>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
-=======
->>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
     return (sum, fcfsarr)
 
 def sstf(dataObject, hPos):
@@ -36,8 +28,6 @@ def sstf(dataObject, hPos):
     return (sum, sstfarr)
 
 def scan(dataObject, hPos, sPos, ePos):
-<<<<<<< HEAD
-<<<<<<< HEAD
     dataObjectforSCAN = dataObject.copy()
     sum = 0
     scanarr = []
@@ -51,34 +41,6 @@ def scan(dataObject, hPos, sPos, ePos):
         for i in range(index, len(dataObjectforSCAN)-1):
             sum += abs(dataObjectforSCAN[i] - dataObjectforSCAN[i+1])
     return (sum, scanarr)
-=======
-    print(dataObject) 
-    sum = 0
-    scanarr = []
-=======
-    print(dataObject) 
-    sum = 0
-    scanarr = []
->>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
-    dataObject.append(sPos)
-    dataObject.append(hPos)
-    dataObject.sort()
-    index = dataObject.index(hPos)
-    
-    while index != 0:
-        scanarr.append(dataObject[index])
-        index -= 1
-    while index != len(dataObject)-1:
-        scanarr.append(dataObject[index])
-        index += 1
-    print(dataObject)    
-    return (sum, scanarr)  
-        
-    
-<<<<<<< HEAD
->>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
-=======
->>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
 
 def cscan(dataObject, hPos, sPos, ePos):
     dataObjectforCSCAN = dataObject.copy()
@@ -127,19 +89,11 @@ def processing(request):
             outArr.append(outputFCFS)
             (outputSSTF, sstfarr) = sstf(datalist, int(hPos))
             outArr.append(outputSSTF)
-<<<<<<< HEAD
-<<<<<<< HEAD
             (outputSCAN, scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
-=======
-            (outputSCAN,scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
->>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
-=======
-            (outputSCAN,scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
->>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
             outArr.append(outputSCAN)
             outputCSCAN = cscan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCSCAN)
             outputCLOOK = clook(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCLOOK)
             best = algoArr[outArr.index(min(outputFCFS, outputSSTF, outputSCAN, outputCSCAN, outputCLOOK))]
-    return render(request, 'processing.html', {'outputFCFS': outputFCFS, 'outputSSTF': outputSSTF, 'outputSCAN': outputSCAN, 'outputCSCAN': outputCSCAN, 'outputCLOOK': outputCLOOK, 'best': best, 'fcfsarr': fcfsarr, 'sstfarr': sstfarr, 'scanarr': scanarr})
+    return render(request, 'processing.html', {'outputFCFS': outputFCFS, 'outputSSTF': outputSSTF, 'outputSCAN': outputSCAN, 'outputCSCAN': outputCSCAN, 'outputCLOOK': outputCLOOK, 'best': best, 'fcfsarr': fcfsarr, 'sstfarr': sstfarr})
