@@ -14,6 +14,7 @@ def fcfs(dataObject, hPos):
         sum += abs(hPos - dataObject[i])
         fcfsarr.append(hPos)
         hPos = dataObject[i]
+    print(dataObject)
     return (sum, fcfsarr)
 
 def sstf(dataObject, hPos):
@@ -33,17 +34,24 @@ def sstf(dataObject, hPos):
     return (sum, sstfarr)
 
 def scan(dataObject, hPos, sPos, ePos):
+    print(dataObject) 
     sum = 0
+    scanarr = []
+    dataObject.append(sPos)
     dataObject.append(hPos)
     dataObject.sort()
     index = dataObject.index(hPos)
-    if index < len(dataObject)/2:
-        for i in range(index, -1, -1):
-            sum += abs(dataObject[i] - dataObject[i-1])
-    else:
-        for i in range(index, len(dataObject)-1):
-            sum += abs(dataObject[i] - dataObject[i+1])
-    return sum
+    
+    while index != 0:
+        scanarr.append(dataObject[index])
+        index -= 1
+    while index != len(dataObject)-1:
+        scanarr.append(dataObject[index])
+        index += 1
+    print(dataObject)    
+    return (sum, scanarr)  
+        
+    
 
 def cscan(dataObject, hPos, sPos, ePos):
     sum = 0
@@ -89,11 +97,11 @@ def processing(request):
             outArr.append(outputFCFS)
             (outputSSTF, sstfarr) = sstf(datalist, int(hPos))
             outArr.append(outputSSTF)
-            outputSCAN = scan(datalist, int(hPos), int(sPos), int(ePos))
+            (outputSCAN,scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputSCAN)
             outputCSCAN = cscan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCSCAN)
             outputCLOOK = clook(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCLOOK)
             best = algoArr[outArr.index(min(outputFCFS, outputSSTF, outputSCAN, outputCSCAN, outputCLOOK))]
-    return render(request, 'processing.html', {'outputFCFS': outputFCFS, 'outputSSTF': outputSSTF, 'outputSCAN': outputSCAN, 'outputCSCAN': outputCSCAN, 'outputCLOOK': outputCLOOK, 'best': best, 'fcfsarr': fcfsarr, 'sstfarr': sstfarr})
+    return render(request, 'processing.html', {'outputFCFS': outputFCFS, 'outputSSTF': outputSSTF, 'outputSCAN': outputSCAN, 'outputCSCAN': outputCSCAN, 'outputCLOOK': outputCLOOK, 'best': best, 'fcfsarr': fcfsarr, 'sstfarr': sstfarr, 'scanarr': scanarr})
