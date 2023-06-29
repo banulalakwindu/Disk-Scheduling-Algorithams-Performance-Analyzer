@@ -13,6 +13,9 @@ def fcfs(dataObject, hPos):
 =======
         hPos = dataObject[i]
     print(dataObject)
+<<<<<<< HEAD
+>>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
+=======
 >>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
     return (sum, fcfsarr)
 
@@ -34,6 +37,7 @@ def sstf(dataObject, hPos):
 
 def scan(dataObject, hPos, sPos, ePos):
 <<<<<<< HEAD
+<<<<<<< HEAD
     dataObjectforSCAN = dataObject.copy()
     sum = 0
     scanarr = []
@@ -51,6 +55,11 @@ def scan(dataObject, hPos, sPos, ePos):
     print(dataObject) 
     sum = 0
     scanarr = []
+=======
+    print(dataObject) 
+    sum = 0
+    scanarr = []
+>>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
     dataObject.append(sPos)
     dataObject.append(hPos)
     dataObject.sort()
@@ -66,6 +75,9 @@ def scan(dataObject, hPos, sPos, ePos):
     return (sum, scanarr)  
         
     
+<<<<<<< HEAD
+>>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
+=======
 >>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
 
 def cscan(dataObject, hPos, sPos, ePos):
@@ -116,7 +128,11 @@ def processing(request):
             (outputSSTF, sstfarr) = sstf(datalist, int(hPos))
             outArr.append(outputSSTF)
 <<<<<<< HEAD
+<<<<<<< HEAD
             (outputSCAN, scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
+=======
+            (outputSCAN,scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
+>>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
 =======
             (outputSCAN,scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
 >>>>>>> bf8c390e9b3d1b8e21d936adfb7f652ad6c972d1
