@@ -77,7 +77,6 @@ def processing(request):
         if form.is_valid():
             algoArr = ['FCFS', 'SSTF', 'SCAN', 'CSCAN', 'CLOOK']
             outArr = []
-            scanarrMy = [1, 2 , 5]
             data = request.POST['data']
             hPos = request.POST['hPos']
             sPos = request.POST['sPos']
