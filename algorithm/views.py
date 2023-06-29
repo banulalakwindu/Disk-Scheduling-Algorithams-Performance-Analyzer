@@ -1,71 +1,70 @@
 from django.shortcuts import render
 from .forms import InputForm
 
-def sum(dataObject):
-    sum = 0
-    for i in range(len(dataObject)):
-        sum += dataObject[i]
-    return sum
-
 def fcfs(dataObject, hPos):
+    dataObjectforFCFS = dataObject.copy()
     sum = 0
     fcfsarr = []
-    for i in range(len(dataObject)):
-        sum += abs(hPos - dataObject[i])
+    for i in range(len(dataObjectforFCFS)):
+        sum += abs(hPos - dataObjectforFCFS[i])
         fcfsarr.append(hPos)
-        hPos = dataObject[i]
+        hPos = dataObjectforFCFS[i]
     return (sum, fcfsarr)
 
 def sstf(dataObject, hPos):
-    length = len(dataObject)
+    dataObjectforSSTF = dataObject.copy()
     sum = 0
     sstfarr = []
-    while len(dataObject) != 0:
+    while len(dataObjectforSSTF) != 0:
         min = 100000
-        for i in range(len(dataObject)):
-            if abs(hPos - dataObject[i]) < min:
-                min = abs(hPos - dataObject[i])
+        for i in range(len(dataObjectforSSTF)):
+            if abs(hPos - dataObjectforSSTF[i]) < min:
+                min = abs(hPos - dataObjectforSSTF[i])
                 index = i
         sum += min
         sstfarr.append(hPos)
-        hPos = dataObject[index]
-        dataObject.pop(index)
+        hPos = dataObjectforSSTF[index]
+        dataObjectforSSTF.pop(index)
     return (sum, sstfarr)
 
 def scan(dataObject, hPos, sPos, ePos):
+    dataObjectforSCAN = dataObject.copy()
     sum = 0
-    dataObject.append(hPos)
-    dataObject.sort()
-    index = dataObject.index(hPos)
-    if index < len(dataObject)/2:
+    scanarr = []
+    dataObjectforSCAN.append(hPos)
+    dataObjectforSCAN.sort()
+    index = dataObjectforSCAN.index(hPos)
+    if index < len(dataObjectforSCAN)/2:
         for i in range(index, -1, -1):
-            sum += abs(dataObject[i] - dataObject[i-1])
+            sum += abs(dataObjectforSCAN[i] - dataObjectforSCAN[i-1])
     else:
-        for i in range(index, len(dataObject)-1):
-            sum += abs(dataObject[i] - dataObject[i+1])
-    return sum
+        for i in range(index, len(dataObjectforSCAN)-1):
+            sum += abs(dataObjectforSCAN[i] - dataObjectforSCAN[i+1])
+    return (sum, scanarr)
 
 def cscan(dataObject, hPos, sPos, ePos):
+    dataObjectforCSCAN = dataObject.copy()
     sum = 0
-    dataObject.append(hPos)
-    dataObject.sort()
-    index = dataObject.index(hPos)
-    for i in range(index, len(dataObject)-1):
-        sum += abs(dataObject[i] - dataObject[i+1])
-    sum += abs(dataObject[len(dataObject)-1] - dataObject[0])
+    dataObjectforCSCAN.append(hPos)
+    dataObjectforCSCAN.sort()
+    index = dataObjectforCSCAN.index(hPos)
+    for i in range(index, len(dataObjectforCSCAN)-1):
+        sum += abs(dataObjectforCSCAN[i] - dataObjectforCSCAN[i+1])
+    sum += abs(dataObjectforCSCAN[len(dataObjectforCSCAN)-1] - dataObjectforCSCAN[0])
     for i in range(0, index):
-        sum += abs(dataObject[i] - dataObject[i+1])
+        sum += abs(dataObjectforCSCAN[i] - dataObjectforCSCAN[i+1])
     return sum
 
 def clook(dataObject, hPos, sPos, ePos):
+    dataObjectforCLOOK = dataObject.copy()
     sum = 0
-    dataObject.append(hPos)
-    dataObject.sort()
-    index = dataObject.index(hPos)
-    for i in range(index, len(dataObject)-1):
-        sum += abs(dataObject[i] - dataObject[i+1])
+    dataObjectforCLOOK.append(hPos)
+    dataObjectforCLOOK.sort()
+    index = dataObjectforCLOOK.index(hPos)
+    for i in range(index, len(dataObjectforCLOOK)-1):
+        sum += abs(dataObjectforCLOOK[i] - dataObjectforCLOOK[i+1])
     for i in range(0, index):
-        sum += abs(dataObject[i] - dataObject[i+1])
+        sum += abs(dataObjectforCLOOK[i] - dataObjectforCLOOK[i+1])
     return sum
 
 def home(request):
@@ -78,6 +77,7 @@ def processing(request):
         if form.is_valid():
             algoArr = ['FCFS', 'SSTF', 'SCAN', 'CSCAN', 'CLOOK']
             outArr = []
+            scanarrMy = [1, 2 , 5]
             data = request.POST['data']
             hPos = request.POST['hPos']
             sPos = request.POST['sPos']
@@ -89,7 +89,7 @@ def processing(request):
             outArr.append(outputFCFS)
             (outputSSTF, sstfarr) = sstf(datalist, int(hPos))
             outArr.append(outputSSTF)
-            outputSCAN = scan(datalist, int(hPos), int(sPos), int(ePos))
+            (outputSCAN, scanarr) = scan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputSCAN)
             outputCSCAN = cscan(datalist, int(hPos), int(sPos), int(ePos))
             outArr.append(outputCSCAN)
