@@ -1,7 +1,7 @@
 # Disk Scheduling Algorithm Simulation App :floppy_disk:
 
 ## Description 📝
-Welcome to our Disk Scheduling Algorithm Simulation App! This app allows you to simulate disk head movement using various scheduling algorithms, including FCFS, SSTF, SCAN, CSCAN, and CLOOK. You can input the disk head position queue, initial head position, start and end positions to visualize the head movement array and graph for each algorithm.
+Welcome to our Disk Scheduling Algorithm Simulation App! This app allows you to simulate disk head movement using various scheduling algorithms, including FCFS, SSTF, SCAN, CSCAN, and CLOOK. You can input the disk head position queue, initial head position, start and end positions to visualize the head movement array and graphs for each algorithm.
 
 ## Technologies Used 💻
 
